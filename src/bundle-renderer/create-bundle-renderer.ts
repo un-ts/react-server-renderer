@@ -144,8 +144,8 @@ export function createBundleRendererCreator(
               if (rendererOptions && rendererOptions.template) {
                 renderStream
                   .on('beforeStart', () => res.emit('beforeStart'))
-                  .on('beforeEnd', () => res.emit('beforeEnd'))
-                  .on('redirect', url => res.emit('redirect', url))
+                  .on('beforeEnd', (...args) => res.emit('beforeEnd', ...args))
+                  .on('redirect', (...args) => res.emit('redirect', ...args))
               }
 
               renderStream.pipe(res)

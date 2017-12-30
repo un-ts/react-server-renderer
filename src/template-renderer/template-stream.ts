@@ -58,15 +58,24 @@ export default class TemplateStream extends Transform {
       }
     }
 
-    this.push(this.template.neck(this.context) + '<div id="app">')
+    this.push(this.template.neck(this.context))
+
+    if (this.inject) {
+      this.push('<div id="app">')
+    }
   }
 
   _flush(done: () => void) {
-    this.emit('beforeEnd')
+    this.emit('beforeEnd', this.started)
 
-    this.push('</div>')
+    if (!this.started) {
+      done()
+      return
+    }
 
     if (this.inject) {
+      this.push('</div>')
+
       const { asyncContext } = this.context
 
       if (asyncContext) {
