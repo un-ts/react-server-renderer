@@ -1,6 +1,6 @@
 {
   "name": "react-server-renderer",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "simple React SSR solution inspired by vue-server-render",
   "repository": "git@github.com:JounQin/react-server-render.git",
   "main": "lib/index.js",

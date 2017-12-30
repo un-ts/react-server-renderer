@@ -69,23 +69,21 @@ export function createRenderer(
     ): NodeJS.ReadableStream {
       const renderStream = renderToNodeStream(component)
 
-      const { url } = context
+      process.nextTick(() => renderStream.emit('afterRender'))
 
-      if (url) {
-        process.nextTick(() => {
-          renderStream.emit('redirect', url)
-        })
-      }
-
-      if (!options.template || url) {
+      if (!options.template) {
         return renderStream
       }
 
       templateRenderer.bindRenderFns(context)
 
       const templateStream = templateRenderer.createStream(context)
-      renderStream.on('error', err => templateStream.emit('error', err))
-      renderStream.pipe(templateStream)
+
+      renderStream
+        .on('afterRender', () => templateStream.emit('afterRender'))
+        .on('error', err => templateStream.emit('error', err))
+        .pipe(templateStream)
+
       return templateStream
     },
   }

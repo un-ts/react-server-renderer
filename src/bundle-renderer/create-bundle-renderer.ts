@@ -143,9 +143,9 @@ export function createBundleRendererCreator(
               // relay HTMLStream special events
               if (rendererOptions && rendererOptions.template) {
                 renderStream
+                  .on('afterRender', () => res.emit('afterRender'))
                   .on('beforeStart', () => res.emit('beforeStart'))
                   .on('beforeEnd', (...args) => res.emit('beforeEnd', ...args))
-                  .on('redirect', (...args) => res.emit('redirect', ...args))
               }
 
               renderStream.pipe(res)
