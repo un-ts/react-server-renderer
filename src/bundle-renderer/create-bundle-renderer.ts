@@ -120,7 +120,7 @@ export function createBundleRendererCreator(
         return promise
       },
 
-      renderToStream: (context?: UserContext) => {
+      renderToStream: (context: UserContext = {}) => {
         const res = new PassThrough()
         run(context)
           .catch(err => {
@@ -142,12 +142,10 @@ export function createBundleRendererCreator(
 
               // relay HTMLStream special events
               if (rendererOptions && rendererOptions.template) {
-                renderStream.on('beforeStart', () => {
-                  res.emit('beforeStart')
-                })
-                renderStream.on('beforeEnd', () => {
-                  res.emit('beforeEnd')
-                })
+                renderStream
+                  .on('beforeStart', () => res.emit('beforeStart'))
+                  .on('beforeEnd', () => res.emit('beforeEnd'))
+                  .on('redirect', url => res.emit('redirect', url))
               }
 
               renderStream.pipe(res)

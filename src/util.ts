@@ -24,7 +24,9 @@ export interface UserContext {
   head?: string
   styles?: string
   getPreloadFiles?: any
+  url?: string
   _styles?: any
   _mappedFiles?: any
   _registeredComponents?: Set<any>
+  [key: string]: any
 }

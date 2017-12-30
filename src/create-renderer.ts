@@ -65,17 +65,23 @@ export function createRenderer(
 
     renderToStream(
       component: ReactElement<any>,
-      context?: UserContext,
+      context: UserContext,
     ): NodeJS.ReadableStream {
-      if (context) {
-        templateRenderer.bindRenderFns(context)
-      }
-
       const renderStream = renderToNodeStream(component)
 
-      if (!options.template) {
+      const { url } = context
+
+      if (url) {
+        process.nextTick(() => {
+          renderStream.emit('redirect', url)
+        })
+      }
+
+      if (!options.template || url) {
         return renderStream
       }
+
+      templateRenderer.bindRenderFns(context)
 
       const templateStream = templateRenderer.createStream(context)
       renderStream.on('error', err => templateStream.emit('error', err))
