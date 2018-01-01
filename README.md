@@ -11,7 +11,7 @@ Yet another simple React SSR solution inspired by vue-server-render with:
 
 ## Real World Demo
 
-[react-study](https://github.com/JounQin/react-study)
+[react-hackernews](https://github.com/JounQin/react-hackernews)
 
 ## Usage
 
@@ -170,11 +170,11 @@ All you need to do is for hot reload on development:
 1. compile server webpack config via node.js API like: `const const serverCompiler = webpack(serverConfig)`
 2. watch serverCompiler and replace server bundle on change
 
-Example: https://github.com/JounQin/react-study/blob/master/server/dev.js
+Example: https://github.com/JounQin/react-hackernews/blob/master/server/dev.js
 
 Your server bundle entry should export a function with a `userContext` param which return a promise, and it should resolve a react component instance.
 
-Example: https://github.com/JounQin/react-study/blob/master/src/entry-server.js
+Example: https://github.com/JounQin/react-hackernews/blob/master/src/entry-server.js
 
 When you need to redirect on server or an error occurs, you should reject inside promise so that we can handle it.
 
