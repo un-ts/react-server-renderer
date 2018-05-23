@@ -128,7 +128,7 @@ export default merge.smart(base, {
 You can then use the generated client manifest, together with a page template:
 
 ```js
-const { createBundleRenderer } = require('react-server-rendererer')
+const { createBundleRenderer } = require('react-server-renderer')
 
 const template = require('fs').readFileSync('/path/to/template.html', 'utf-8')
 const serverBundle = require('/path/to/vue-ssr-server-bundle.json')
