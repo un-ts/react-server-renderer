@@ -1,6 +1,6 @@
 {
   "name": "react-server-renderer",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "simple React SSR solution inspired by vue-server-render",
   "repository": "git@github.com:JounQin/react-server-renderer.git",
   "main": "lib/index.js",
@@ -8,43 +8,37 @@
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
   "scripts": {
-    "lint": "tslint -p . -e 'node_modules/**' -e 'lib/**' -t stylish '**/*.ts'",
+    "lint": "tslint -p . -t stylish",
     "prepublishOnly": "tsc"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "all",
-    "overrides": [
-      {
-        "files": "*.json",
-        "options": {
-          "printWidth": 150
-        }
-      }
-    ]
+    "trailingComma": "all"
   },
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
-    "resolve": "^1.5.0",
-    "serialize-javascript": "^1.4.0",
+    "lodash": "^4.17.11",
+    "resolve": "^1.8.1",
+    "serialize-javascript": "^1.5.0",
     "source-map": "^0.7.0"
   },
   "devDependencies": {
-    "@types/node": "^10.0.3",
-    "@types/react": "^16.0.31",
-    "@types/react-dom": "^16.0.3",
-    "prettier": "^1.9.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "tslint": "^5.8.0",
-    "tslint-config-prettier": "^1.6.0",
+    "@types/node": "^10.10.0",
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "prettier": "^1.14.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
     "tslint-plugin-prettier": "^2.0.0",
-    "typescript": "^2.6.2"
+    "typescript": "^3.0.3"
   }
 }
