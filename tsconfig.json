@@ -8,5 +8,6 @@
     "sourceRoot": "src",
     "sourceMap": true,
     "outDir": "lib"
-  }
+  },
+  "exclude": ["lib", "node_modules"]
 }
