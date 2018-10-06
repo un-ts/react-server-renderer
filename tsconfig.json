@@ -4,7 +4,7 @@
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "lib": ["esnext"],
+    "lib": ["dom", "esnext"],
     "sourceRoot": "src",
     "sourceMap": true,
     "outDir": "lib"
