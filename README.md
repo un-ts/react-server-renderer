@@ -185,7 +185,7 @@ If you set `context.state` on server, it will auto inject a script contains `win
 
 ### Style injection and Head Management
 
-Without SSR, we can easily use `style-loader`, however we need to collect rendered components with there styles together on runtime, so we choose to use [react-style-loader](https://github.com/JounQin/react-style-loader) which forked [vue-style-loader](https://github.com/vuejs/vue-style-loader) indeed.
+Without SSR, we can easily use `style-loader`, however we need to collect rendered components with their styles together on runtime, so we choose to use [react-style-loader](https://github.com/JounQin/react-style-loader) which forked [vue-style-loader](https://github.com/vuejs/vue-style-loader) indeed.
 
 Let's create a simple HOC for server style, title management and http injection.
 
