@@ -1,8 +1,8 @@
-import * as path from 'path'
-import * as vm from 'vm'
+import path from 'path'
+import vm from 'vm'
 
 import { isPlainObject } from 'lodash'
-import * as _resolve from 'resolve'
+import _resolve from 'resolve'
 
 import { UserContext } from '../util'
 

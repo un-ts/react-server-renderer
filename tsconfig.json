@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
+    "inlineSourceMap": true,
     "lib": ["dom", "esnext"],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -11,7 +12,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceRoot": "src",
-    "sourceMap": true,
     "outDir": "lib"
   },
   "exclude": ["lib", "node_modules"]

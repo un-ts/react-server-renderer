@@ -1,5 +1,5 @@
-import * as path from 'path'
-import * as serialize from 'serialize-javascript'
+import path from 'path'
+import serialize from 'serialize-javascript'
 
 import { UserContext, isCSS, isJS } from '../util'
 import { AsyncFileMapper, createMapper } from './create-async-file-mapper'

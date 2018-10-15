@@ -1,6 +1,6 @@
 import { Transform } from 'stream'
 
-import * as serialize from 'serialize-javascript'
+import serialize from 'serialize-javascript'
 
 import TemplateRenderer from '.'
 import { UserContext } from '../util'
