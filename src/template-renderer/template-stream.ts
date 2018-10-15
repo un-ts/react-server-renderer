@@ -26,7 +26,7 @@ export default class TemplateStream extends Transform {
     this.inject = renderer.inject
   }
 
-  _transform(data: Buffer | string, encoding: string, done: () => void) {
+  _transform(data: Buffer | string, _encoding: string, done: () => void) {
     if (!this.started) {
       this.emit('beforeStart')
       this.start()

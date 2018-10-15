@@ -56,7 +56,7 @@ export function createBundleRendererCreator(
         bundle = fs.readFileSync(bundle, 'utf-8')
         if (isJSON) {
           try {
-            bundle = JSON.parse(bundle as string)
+            bundle = JSON.parse(bundle)
           } catch (e) {
             throw new Error(`Invalid JSON bundle file: ${bundle}`)
           }
