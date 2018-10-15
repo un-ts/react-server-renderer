@@ -1,6 +1,6 @@
 {
   "name": "react-server-renderer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "simple React SSR solution inspired by vue-server-render",
   "repository": "git@github.com:JounQin/react-server-renderer.git",
   "main": "lib/index.js",
@@ -14,7 +14,9 @@
   "files": [
     "lib",
     "client-plugin.js",
-    "server-plugin.js"
+    "client-plugin.d.ts",
+    "server-plugin.js",
+    "server-plugin.d.ts"
   ],
   "husky": {
     "hooks": {

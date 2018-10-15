@@ -14,5 +14,10 @@
     "sourceRoot": "src",
     "outDir": "lib"
   },
-  "exclude": ["lib", "node_modules"]
+  "exclude": [
+    "./client-plugin.d.ts",
+    "./server-plugin.d.ts",
+    "lib",
+    "node_modules"
+  ]
 }
