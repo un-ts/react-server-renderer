@@ -54,7 +54,7 @@
   "devDependencies": {
     "@types/hash-sum": "^1.0.0",
     "@types/lodash.uniq": "^4.5.4",
-    "@types/node": "^10.12.0",
+    "@types/node": "^11.9.0",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "@types/resolve": "^0.0.8",
