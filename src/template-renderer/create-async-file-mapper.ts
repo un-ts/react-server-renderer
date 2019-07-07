@@ -12,7 +12,7 @@ export function createMapper(clientManifest: ClientManifest): AsyncFileMapper {
   const map = createMap(clientManifest)
   // map server-side moduleIds to client-side files
   return function mapper(moduleIds: string[]): string[] {
-    const res = new Set()
+    const res = new Set<string>()
     for (const moduleId of moduleIds) {
       const mapped = map.get(moduleId)
       if (mapped) {

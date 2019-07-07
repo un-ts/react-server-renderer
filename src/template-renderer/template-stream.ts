@@ -1,10 +1,12 @@
 import { Transform } from 'stream'
 
-import serialize from 'serialize-javascript'
+import { UserContext } from '../util'
+
+import { ParsedTemplate } from './parse-template'
 
 import TemplateRenderer from '.'
-import { UserContext } from '../util'
-import { ParsedTemplate } from './parse-template'
+
+import serialize from 'serialize-javascript'
 
 export default class TemplateStream extends Transform {
   started: boolean

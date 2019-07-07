@@ -1,6 +1,6 @@
 {
   "name": "react-server-renderer",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "simple React SSR solution inspired by vue-server-render",
   "repository": "git@github.com:JounQin/react-server-renderer.git",
   "main": "lib/index.js",
@@ -8,7 +8,7 @@
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
   "scripts": {
-    "lint": "tslint -p . -t stylish",
+    "lint": "eslint . --ext .js,.ts",
     "build": "tsc"
   },
   "files": [
@@ -18,56 +18,32 @@
     "server-plugin.js",
     "server-plugin.d.ts"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "tsc"
-    }
-  },
-  "lint-staged": {
-    "*.ts": [
-      "tslint -p . -t stylish --fix",
-      "git add"
-    ],
-    "*.{md,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all"
-  },
   "peerDependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
   },
   "dependencies": {
-    "hash-sum": "^1.0.2",
+    "hash-sum": "^2.0.0",
     "lodash": "^4.17.11",
-    "lodash.uniq": "^4.5.0",
-    "resolve": "^1.8.1",
-    "serialize-javascript": "^1.5.0",
+    "resolve": "^1.11.1",
+    "serialize-javascript": "^1.7.0",
     "source-map": "^0.7.0"
   },
   "devDependencies": {
     "@types/hash-sum": "^1.0.0",
-    "@types/lodash.uniq": "^4.5.4",
-    "@types/node": "^10.12.0",
-    "@types/react": "^16.4.18",
-    "@types/react-dom": "^16.0.9",
+    "@types/lodash": "^4.14.135",
+    "@types/node": "^12.0.12",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
     "@types/resolve": "^0.0.8",
     "@types/serialize-javascript": "^1.5.0",
-    "husky": "^1.1.2",
-    "lint-staged": "^7.3.0",
-    "prettier": "^1.14.3",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0",
-    "tslint-config-standard": "^8.0.1",
-    "tslint-plugin-prettier": "^2.0.0",
-    "typescript": "^3.1.3"
+    "eslint": "^6.0.1",
+    "eslint-config-1stg": "^5.2.0",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.1.0",
+    "prettier": "^1.18.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.5.2"
   }
 }

@@ -4,15 +4,15 @@
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
-    "inlineSourceMap": true,
     "lib": ["dom", "esnext"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "sourceRoot": "src",
-    "outDir": "lib"
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es5"
   },
   "exclude": [
     "./client-plugin.d.ts",

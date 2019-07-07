@@ -1,10 +1,12 @@
 import path from 'path'
-import serialize from 'serialize-javascript'
 
 import { UserContext, isCSS, isJS } from '../util'
+
 import { AsyncFileMapper, createMapper } from './create-async-file-mapper'
 import { ParsedTemplate, parseTemplate } from './parse-template'
 import TemplateStream from './template-stream'
+
+import serialize from 'serialize-javascript'
 
 export interface TemplateRendererOptions {
   template?: string

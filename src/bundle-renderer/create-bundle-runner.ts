@@ -1,13 +1,11 @@
 import path from 'path'
 import vm from 'vm'
-
-import { isPlainObject } from 'lodash'
-import _resolve from 'resolve'
+import NativeModule from 'module'
 
 import { UserContext } from '../util'
 
-// tslint:disable-next-line no-var-requires
-const NativeModule = require('module')
+import { isPlainObject } from 'lodash'
+import _resolve from 'resolve'
 
 function createSandbox(context?) {
   const sandbox = {

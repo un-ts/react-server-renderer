@@ -1,0 +1,5 @@
+/lib
+/client-plugin.js
+/client-plugin.d.ts
+/server-plugin.js
+/server-plugin.d.ts

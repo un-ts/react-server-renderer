@@ -1,8 +1,8 @@
-import { ReactElement } from 'react'
-import { renderToNodeStream, renderToString } from 'react-dom/server'
-
 import TemplateRenderer, { TemplateRendererOptions } from './template-renderer'
 import { UserContext, createPromiseCallback } from './util'
+
+import { ReactElement } from 'react'
+import { renderToNodeStream, renderToString } from 'react-dom/server'
 
 export type RenderOptions = TemplateRendererOptions & {
   basedir?: string

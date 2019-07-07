@@ -2,15 +2,16 @@ import fs from 'fs'
 import path from 'path'
 import { PassThrough } from 'stream'
 
-import { ReactElement } from 'react'
-
 import { RenderOptions, Renderer } from '../create-renderer'
 import { UserContext, createPromiseCallback } from '../util'
+
 import { createBundleRunner } from './create-bundle-runner'
 import {
   createSourceMapConsumers,
   rewriteErrorTrace,
 } from './source-map-support'
+
+import { ReactElement } from 'react'
 
 const INVALID_MSG =
   'Invalid server-rendering bundle format. Should be a string ' +

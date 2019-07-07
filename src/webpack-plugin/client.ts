@@ -1,6 +1,7 @@
-import hash from 'hash-sum'
-import uniq from 'lodash.uniq'
 import { isCSS, isJS, onEmit } from './util'
+
+import hash from 'hash-sum'
+import { uniq } from 'lodash'
 
 export class ReactSSRClientPlugin {
   options: {
@@ -60,7 +61,7 @@ export class ReactSSRClientPlugin {
           // find all asset modules associated with the same chunk
           assetModules.forEach(module => {
             if (module.chunks.some(chunkId => chunkId === cid)) {
-              files.push.apply(files, module.assets.map(fileToIndex))
+              files.push(...module.assets.map(fileToIndex))
             }
           })
         }
