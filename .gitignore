@@ -3,3 +3,5 @@ node_modules
 *.log
 .*cache
 .type-coverage
+/.yarn/*
+!/.yarn/plugins
