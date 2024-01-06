@@ -1,8 +1,8 @@
 {
   "name": "react-server-renderer",
   "version": "1.2.0",
-  "description": "simple React SSR solution inspired by vue-server-render",
-  "repository": "git@github.com:JounQin/react-server-renderer.git",
+  "description": "Yet another simple React SSR solution inspired by vue-server-render",
+  "repository": "git@github.com:un-ts/react-server-renderer.git",
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
   "type": "module",
@@ -34,7 +34,8 @@
     "lint:es": "eslint . --cache",
     "lint:tsc": "tsc --noEmit",
     "typecov": "type-coverage",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "release": "clean-pkg-json && changeset publish"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
@@ -63,6 +64,7 @@
     "@types/resolve": "^1.20.6",
     "@types/serialize-javascript": "^5.0.4",
     "@types/webpack": "^5.28.5",
+    "clean-pkg-json": "^1.2.0",
     "eslint": "^8.56.0",
     "lint-staged": "^15.2.0",
     "npm-run-all2": "^6.1.1",

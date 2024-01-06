@@ -32,9 +32,8 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          commit: 'chore: release synckit'
-          title: 'chore: release synckit'
-          version: yarn run version
+          commit: 'chore: release react-server-renderer'
+          title: 'chore: release react-server-renderer'
           publish: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

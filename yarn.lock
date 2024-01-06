@@ -5577,6 +5577,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clean-pkg-json@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "clean-pkg-json@npm:1.2.0"
+  bin:
+    clean-pkg-json: dist/index.js
+  checksum: d08b1d3cd71878dfadd432bff551345101f57605947dc9ab1b39359863e784c204474ea038e50f44154899f41631d152ff306a2f9f8d825c318e74c317e820bc
+  languageName: node
+  linkType: hard
+
 "clean-regexp@npm:^1.0.0":
   version: 1.0.0
   resolution: "clean-regexp@npm:1.0.0"
@@ -11989,6 +11998,7 @@ __metadata:
     "@types/serialize-javascript": "npm:^5.0.4"
     "@types/webpack": "npm:^5.28.5"
     chalk: "npm:^4.1.2"
+    clean-pkg-json: "npm:^1.2.0"
     eslint: "npm:^8.56.0"
     hash-sum: "npm:^2.0.0"
     lint-staged: "npm:^15.2.0"

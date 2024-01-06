@@ -129,7 +129,7 @@ import fs from 'node:fs'
 import { createBundleRenderer } from 'react-server-renderer'
 
 import serverBundle from '/path/to/react-ssr-server-bundle.json' with { type: 'json' }
-import  clientManifest from '/path/to/react-ssr-client-manifest.json' with { type: 'json' }
+import clientManifest from '/path/to/react-ssr-client-manifest.json' with { type: 'json' }
 
 import template = fs.readFileSync('/path/to/template.html', 'utf-8')
 
