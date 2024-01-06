@@ -1,24 +1,22 @@
-import { Transform } from 'stream'
-
-import { UserContext } from '../util'
-
-import { ParsedTemplate } from './parse-template'
-
-import TemplateRenderer from '.'
+import { Transform } from 'node:stream'
 
 import serialize from 'serialize-javascript'
 
+import type { ParsedTemplate, UserContext } from '../types.js'
+
+import { TemplateRenderer } from './index.js'
+
 export default class TemplateStream extends Transform {
-  started: boolean
-  renderer: TemplateRenderer
-  template: ParsedTemplate
-  context: UserContext
-  inject: boolean
+  declare started: boolean
+  declare renderer: TemplateRenderer
+  declare template: ParsedTemplate
+  declare context: UserContext
+  declare inject: boolean
 
   constructor(
     renderer: TemplateRenderer,
     template: ParsedTemplate,
-    context: UserContext,
+    context?: UserContext,
   ) {
     super()
     this.started = false
@@ -28,7 +26,11 @@ export default class TemplateStream extends Transform {
     this.inject = renderer.inject
   }
 
-  _transform(data: Buffer | string, _encoding: string, done: () => void) {
+  override _transform(
+    data: Buffer | string,
+    _encoding: string,
+    done: () => void,
+  ) {
     if (!this.started) {
       this.emit('beforeStart')
       this.start()
@@ -67,7 +69,7 @@ export default class TemplateStream extends Transform {
     }
   }
 
-  _flush(done: () => void) {
+  override _flush(done: () => void) {
     this.emit('beforeEnd', this.started)
 
     if (!this.started) {

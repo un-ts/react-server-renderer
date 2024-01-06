@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  default:
+    strategy:
+      matrix:
+        node:
+          - 18
+          - 20
+        os:
+          - macOS-latest
+          - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: yarn
+
+      - name: Install Dependencies
+        run: yarn --immutable
+
+      - name: Lint, Build
+        run: |
+          yarn lint
+          yarn typecov
+          yarn build
+        env:
+          EFF_NO_LINK_RULES: true
+          PARSER_NO_WATCH: true

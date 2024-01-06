@@ -1,10 +1,14 @@
 # react-server-renderer
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/JounQin/react-server-renderer.svg)](https://greenkeeper.io/)
-[![Travis](https://img.shields.io/travis/JounQin/react-server-renderer.svg)](https://travis-ci.org/JounQin/react-server-renderer)
-[![David](https://img.shields.io/david/JounQin/react-server-renderer.svg)](https://david-dm.org/JounQin/react-server-renderer)
-[![David Dev](https://img.shields.io/david/dev/JounQin/react-server-renderer.svg)](https://david-dm.org/JounQin/react-server-renderer?type=dev)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![GitHub Actions](https://github.com/un-ts/react-server-renderer/workflows/CI/badge.svg)](https://github.com/un-ts/react-server-renderer/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/react-server-renderer.svg)](https://www.npmjs.com/package/react-server-renderer)
+[![GitHub Release](https://img.shields.io/github/release/un-ts/react-server-renderer)](https://github.com/un-ts/react-server-renderer/releases)
+
+[![Conventional Commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![changesets](https://img.shields.io/badge/maintained%20with-changesets-176de3.svg)](https://github.com/atlassian/changesets)
 
 Yet another simple React SSR solution inspired by vue-server-render with:
 
@@ -22,7 +26,7 @@ Yet another simple React SSR solution inspired by vue-server-render with:
 
 This module is heavily inspired by [vue-server-render](https://ssr.vuejs.org), it is recommended to read about [bundle-renderer](https://ssr.vuejs.org/en/bundle-renderer.html).
 
-It uses [react-router](https://github.com/ReactTraining/react-router) on server, so you should read about [Server Rendering](https://reacttraining.com/react-router/web/guides/server-rendering).
+It uses [react-router](https://github.com/remix-run/react-router) on server, so you should read about [Server Rendering](https://reactrouter.com/en/main/guides/ssr).
 
 And also, data injection should be implement with [asyncBootstrap](https://github.com/ctrlplusb/react-async-bootstrapper).
 
@@ -120,11 +124,14 @@ export default merge.smart(base, {
 You can then use the generated client manifest, together with a page template:
 
 ```js
-const { createBundleRenderer } = require('react-server-renderer')
+import fs from 'node:fs'
 
-const template = require('fs').readFileSync('/path/to/template.html', 'utf-8')
-const serverBundle = require('/path/to/react-ssr-server-bundle.json')
-const clientManifest = require('/path/to/react-ssr-client-manifest.json')
+import { createBundleRenderer } from 'react-server-renderer'
+
+import serverBundle from '/path/to/react-ssr-server-bundle.json' with { type: 'json' }
+import  clientManifest from '/path/to/react-ssr-client-manifest.json' with { type: 'json' }
+
+import template = fs.readFileSync('/path/to/template.html', 'utf-8')
 
 const renderer = createBundleRenderer(serverBundle, {
   template,
@@ -138,11 +145,27 @@ With this setup, your server-rendered HTML for a build with code-splitting will 
 <html>
   <head>
     <!-- chunks used for this render will be preloaded -->
-    <link rel="preload" href="/manifest.js" as="script">
-    <link rel="preload" href="/main.js" as="script">
-    <link rel="preload" href="/0.js" as="script">
+    <link
+      rel="preload"
+      href="/manifest.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/main.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/0.js"
+      as="script"
+    />
     <!-- unused async chunks will be prefetched (lower priority) -->
-    <link rel="prefetch" href="/1.js" as="script">
+    <link
+      rel="prefetch"
+      href="/1.js"
+      as="script"
+    />
   </head>
   <body>
     <!-- app content -->
@@ -153,7 +176,8 @@ With this setup, your server-rendered HTML for a build with code-splitting will 
     <script src="/0.js"></script>
     <script src="/main.js"></script>
   </body>
-</html>`
+</html>
+`
 ```
 
 ### Server bundle
@@ -228,10 +252,10 @@ export const withSsr = (styles, router = true, title) => {
   }
 
   return Component => {
-    class SsrConmponent extends React.PureComponent {
-      static displayName = `Ssr${Component.displayName ||
-        Component.name ||
-        'Component'}`
+    class SsrComponent extends React.PureComponent {
+      static displayName = `Ssr${
+        Component.displayName || Component.name || 'Component'
+      }`
 
       static propTypes = {
         staticContext: PropTypes.object,
@@ -258,7 +282,7 @@ export const withSsr = (styles, router = true, title) => {
     }
 
     return hoistStatics(
-      router ? withRouter(SsrConmponent) : SsrConmponent,
+      router ? withRouter(SsrComponent) : SsrComponent,
       Component,
     )
   }
@@ -311,11 +335,17 @@ export default class Home extends React.PureComponent {
     return (
       <div className="container">
         <h2 className={styles.heading}>Counter</h2>
-        <button className="btn btn-primary" onClick={this.props.decrease}>
+        <button
+          className="btn btn-primary"
+          onClick={this.props.decrease}
+        >
           -
         </button>
         {this.props.counter}
-        <button className="btn btn-primary" onClick={this.props.increase}>
+        <button
+          className="btn btn-primary"
+          onClick={this.props.increase}
+        >
           +
         </button>
       </div>

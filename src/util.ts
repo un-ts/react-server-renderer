@@ -1,32 +1,32 @@
-export const isJS = (file: string): boolean => /\.js(\?[^.]+)?$/.test(file)
+import { isPlainObject } from 'lodash'
 
-export const isCSS = (file: string): boolean => /\.css(\?[^.]+)?$/.test(file)
+import type { File } from './types.js'
+
+export const getFilename = (file: File) =>
+  typeof file === 'string' ? file : file.name
+
+export const isJS = (file: File): boolean =>
+  /\.js(?:\?[^.]+)?$/.test(getFilename(file))
+
+export const isCSS = (file: File): boolean =>
+  /\.css(?:\?[^.]+)?$/.test(getFilename(file))
+
+export const isObjectType = isPlainObject as <T>(
+  value: unknown,
+) => value is T & object
 
 export function createPromiseCallback() {
-  let resolve
-  let reject
-  // tslint:disable-next-line variable-name
-  const promise: Promise<string> = new Promise((_resolve, _reject) => {
+  let resolve: (res: string) => void
+  let reject: (err: Error) => void
+  const promise = new Promise<string>((_resolve, _reject) => {
     resolve = _resolve
     reject = _reject
   })
-  const cb = (err: Error, res?: string) => {
+  const cb = (err: Error | null, res?: string) => {
     if (err) {
       return reject(err)
     }
     resolve(res || '')
   }
   return { promise, cb }
-}
-
-export interface UserContext {
-  asyncContext?: any
-  head?: string
-  styles?: string
-  getPreloadFiles?: any
-  url?: string
-  _styles?: any
-  _mappedFiles?: any
-  _registeredComponents?: Set<any>
-  [key: string]: any
 }
