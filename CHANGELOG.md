@@ -1,5 +1,11 @@
 # react-server-renderer
 
+## 2.0.1
+
+### Patch Changes
+
+- [#48](https://github.com/un-ts/react-server-renderer/pull/48) [`8a071aa`](https://github.com/un-ts/react-server-renderer/commit/8a071aa6d80e91ef2fc1fde4b69febd4f9da2bb4) Thanks [@JounQin](https://github.com/JounQin)! - fix: unexpected empty package content
+
 ## 2.0.0
 
 ### Major Changes
