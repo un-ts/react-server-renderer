@@ -1,14 +1,12 @@
 import { template as compile } from 'lodash'
 
-const compileOptions = {
-  escape: /{{([^{][\s\S]+?[^}])}}/g,
-  interpolate: /{{{([\s\S]+?)}}}/g,
-}
+import type { ParsedTemplate } from '../types.js'
 
-export interface ParsedTemplate {
-  head: (data: any) => string
-  neck: (data: any) => string
-  tail: (data: any) => string
+const compileOptions = {
+  // eslint-disable-next-line regexp/strict, regexp/match-any
+  escape: /{{([^{][\S\s]+?[^}])}}/g,
+  // eslint-disable-next-line regexp/strict, regexp/match-any
+  interpolate: /{{{([\S\s]+?)}}}/g,
 }
 
 export function parseTemplate(

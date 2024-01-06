@@ -3,47 +3,93 @@
   "version": "1.2.0",
   "description": "simple React SSR solution inspired by vue-server-render",
   "repository": "git@github.com:JounQin/react-server-renderer.git",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
-  "scripts": {
-    "lint": "eslint . --ext .js,.ts",
-    "build": "tsc"
+  "type": "module",
+  "packageManager": "yarn@4.0.2",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.cjs",
+      "default": "./lib/index.js"
+    },
+    "./client-plugin": "./lib/webpack-plugin/client.js",
+    "./server-plugin": "./lib/webpack-plugin/server.js",
+    "./package.json": "./package.json"
   },
   "files": [
-    "lib",
-    "client-plugin.js",
-    "client-plugin.d.ts",
-    "server-plugin.js",
-    "server-plugin.d.ts"
+    "lib"
   ],
+  "engines": {
+    "node": "^12.20.0 || >=14.13.0"
+  },
+  "scripts": {
+    "build": "run-p 'build:*'",
+    "build:r": "r -f cjs",
+    "build:tsc": "tsc",
+    "lint": "run-p 'lint:*'",
+    "lint:es": "eslint . --cache",
+    "lint:tsc": "tsc --noEmit",
+    "typecov": "type-coverage",
+    "prepare": "simple-git-hooks"
+  },
   "peerDependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0",
+    "webpack": "^3.0.0 || ^4.0.0 || ^5.0.0"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "hash-sum": "^2.0.0",
-    "lodash": "^4.17.11",
-    "resolve": "^1.11.1",
-    "serialize-javascript": "^1.7.0",
-    "source-map": "^0.7.0"
+    "lodash": "^4.17.21",
+    "resolve": "^1.22.8",
+    "serialize-javascript": "^6.0.1",
+    "source-map": "^0.7.4"
   },
   "devDependencies": {
-    "@types/hash-sum": "^1.0.0",
-    "@types/lodash": "^4.14.135",
-    "@types/node": "^12.0.12",
-    "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.4",
-    "@types/resolve": "^0.0.8",
-    "@types/serialize-javascript": "^1.5.0",
-    "eslint": "^6.0.1",
-    "eslint-config-1stg": "^5.2.0",
-    "husky": "^3.0.0",
-    "lint-staged": "^9.1.0",
-    "prettier": "^1.18.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "typescript": "^3.5.2"
+    "@1stg/common-config": "^10.0.0",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^18.4.4",
+    "@pkgr/rollup": "^5.0.0",
+    "@types/hash-sum": "^1.0.2",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@types/resolve": "^1.20.6",
+    "@types/serialize-javascript": "^5.0.4",
+    "@types/webpack": "^5.28.5",
+    "eslint": "^8.56.0",
+    "lint-staged": "^15.2.0",
+    "npm-run-all2": "^6.1.1",
+    "prettier": "^3.1.1",
+    "react": "18.2.0",
+    "react-async-component": "^2.0.0",
+    "react-dom": "^18.2.0",
+    "simple-git-hooks": "^2.9.0",
+    "type-coverage": "^2.27.1",
+    "typescript": "^5.3.3"
+  },
+  "resolutions": {
+    "prettier": "^3.1.1"
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "cache": true,
+    "detail": true,
+    "ignoreAsAssertion": true,
+    "ignoreNonNullAssertion": true,
+    "ignoreFiles": [
+      "*.d.ts"
+    ],
+    "ignoreNested": true,
+    "showRelativePath": true,
+    "skipCatch": true,
+    "strict": true,
+    "update": true
   }
 }

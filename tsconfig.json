@@ -1,23 +1,8 @@
 {
+  "extends": "@1stg/tsconfig/node16",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "declaration": true,
-    "esModuleInterop": true,
-    "lib": ["dom", "esnext"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "target": "es5"
+    "rootDir": "src",
+    "outDir": "lib"
   },
-  "exclude": [
-    "./client-plugin.d.ts",
-    "./server-plugin.d.ts",
-    "lib",
-    "node_modules"
-  ]
+  "exclude": ["lib", "client-plugin.d.ts", "server-plugin.d.ts"]
 }

@@ -4,9 +4,7 @@
  * directly in the rendered HTML to avoid waterfall requests.
  */
 
-import { ClientManifest } from '.'
-
-export type AsyncFileMapper = (files: string[]) => string[]
+import type { AsyncFileMapper, ClientManifest } from '../types.js'
 
 export function createMapper(clientManifest: ClientManifest): AsyncFileMapper {
   const map = createMap(clientManifest)
@@ -21,29 +19,29 @@ export function createMapper(clientManifest: ClientManifest): AsyncFileMapper {
         }
       }
     }
-    return Array.from(res)
+    return [...res]
   }
 }
 
-function createMap(clientManifest) {
-  const map = new Map()
-  Object.keys(clientManifest.modules).forEach(id => {
+function createMap(clientManifest: ClientManifest) {
+  const map = new Map<string, string[]>()
+  for (const id of Object.keys(clientManifest.modules)) {
     map.set(id, mapIdToFile(id, clientManifest))
-  })
+  }
   return map
 }
 
-function mapIdToFile(id, clientManifest) {
+function mapIdToFile(id: string, clientManifest: ClientManifest) {
   const files = []
   const fileIndices = clientManifest.modules[id]
   if (fileIndices) {
-    fileIndices.forEach(index => {
+    for (const index of fileIndices) {
       const file = clientManifest.all[index]
       // only include async files or non-js assets
-      if (clientManifest.async.indexOf(file) > -1 || !/\.js($|\?)/.test(file)) {
+      if (clientManifest.async?.includes(file) || !/\.js(?:$|\?)/.test(file)) {
         files.push(file)
       }
-    })
+    }
   }
   return files
 }

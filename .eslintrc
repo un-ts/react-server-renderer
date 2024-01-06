@@ -1,15 +1,9 @@
 {
-  "extends": "1stg/react",
-  "rules": {
-    "@typescript-eslint/camelcase": 0,
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-use-before-define": [
-      2,
-      {
-        "functions": false,
-        "classes": true
-      }
-    ],
-    "promise/param-names": 0
+  "root": true,
+  "extends": "@1stg",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

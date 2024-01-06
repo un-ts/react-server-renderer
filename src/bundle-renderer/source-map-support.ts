@@ -1,39 +1,39 @@
-import { SourceMapConsumer } from 'source-map'
+import {
+  type RawSourceMap,
+  SourceMapConsumer,
+  type RawIndexMap,
+} from 'source-map'
 
 const filenameRE = /\(([^)]+\.js):(\d+):(\d+)\)$/
 
-export function createSourceMapConsumers(rawMaps: object) {
-  const maps = {}
-  Object.keys(rawMaps).forEach(file => {
+export function createSourceMapConsumers(
+  rawMaps: Record<string, RawIndexMap | RawSourceMap>,
+) {
+  const maps: Record<string, Promise<SourceMapConsumer>> = {}
+  for (const file of Object.keys(rawMaps)) {
     maps[file] = new SourceMapConsumer(rawMaps[file])
-  })
+  }
   return maps
 }
 
 export function rewriteErrorTrace(
-  e: any,
-  mapConsumers: {
-    [key: string]: SourceMapConsumer
-  },
+  err: Error | null,
+  mapConsumers: Record<string, Promise<SourceMapConsumer>>,
 ) {
-  if (e && typeof e.stack === 'string') {
-    e.stack = e.stack
+  if (err && typeof err.stack === 'string') {
+    err.stack = err.stack
       .split('\n')
-      .map(line => {
-        return rewriteTraceLine(line, mapConsumers)
-      })
+      .map(line => rewriteTraceLine(line, mapConsumers))
       .join('\n')
   }
 }
 
-function rewriteTraceLine(
+async function rewriteTraceLine(
   trace: string,
-  mapConsumers: {
-    [key: string]: SourceMapConsumer
-  },
+  mapConsumers: Record<string, Promise<SourceMapConsumer>>,
 ) {
   const m = trace.match(filenameRE)
-  const map = m && mapConsumers[m[1]]
+  const map = m && (await mapConsumers[m[1]])
   if (m != null && map) {
     const originalPosition = map.originalPositionFor({
       line: Number(m[2]),
@@ -41,15 +41,12 @@ function rewriteTraceLine(
     })
     if (originalPosition.source != null) {
       const { source, line, column } = originalPosition
-      const mappedPosition = `(${source.replace(
-        /^webpack:\/\/\//,
-        '',
-      )}:${String(line)}:${String(column)})`
+      const mappedPosition = `(${source.replace(/^webpack:\/{3}/, '')}:${String(
+        line,
+      )}:${String(column)})`
       return trace.replace(filenameRE, mappedPosition)
-    } else {
-      return trace
     }
-  } else {
-    return trace
   }
+
+  return trace
 }

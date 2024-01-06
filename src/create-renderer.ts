@@ -1,25 +1,15 @@
-import TemplateRenderer, { TemplateRendererOptions } from './template-renderer'
-import { UserContext, createPromiseCallback } from './util'
-
 import { ReactElement } from 'react'
+// eslint-disable-next-line sonar/deprecation -- compatibility
 import { renderToNodeStream, renderToString } from 'react-dom/server'
 
-export type RenderOptions = TemplateRendererOptions & {
-  basedir?: string
-  runInNewContext?: false | 'once'
-}
-
-export interface Renderer {
-  renderToString?: (
-    component: ReactElement<any>,
-    context: UserContext,
-    cb: any,
-  ) => Promise<string>
-  renderToStream: (
-    component: ReactElement<any>,
-    context: UserContext,
-  ) => NodeJS.ReadableStream
-}
+import { TemplateRenderer } from './template-renderer/index.js'
+import type {
+  Callback,
+  Renderer,
+  TemplateRendererOptions,
+  UserContext,
+} from './types.js'
+import { createPromiseCallback } from './util.js'
 
 export function createRenderer(
   options: TemplateRendererOptions = {},
@@ -28,9 +18,9 @@ export function createRenderer(
 
   return {
     renderToString(
-      component: ReactElement<any>,
-      context: UserContext,
-      cb: any,
+      component: ReactElement,
+      context?: UserContext,
+      cb?: Callback<string>,
     ): Promise<string> {
       if (typeof context === 'function') {
         cb = context
@@ -41,13 +31,13 @@ export function createRenderer(
       }
 
       // no callback, return Promise
-      let promise
+      let promise!: Promise<string>
 
       if (!cb) {
         ;({ promise, cb } = createPromiseCallback())
       }
 
-      let result
+      let result: string
 
       try {
         result = renderToString(component)
@@ -56,17 +46,19 @@ export function createRenderer(
           result = templateRenderer.renderSync(result, context)
         }
         cb(null, result)
-      } catch (e) {
-        cb(e)
+      } catch (err) {
+        // eslint-disable-next-line n/no-callback-literal -- FIXME: https://github.com/eslint-community/eslint-plugin-n/issues/162
+        cb(err as Error)
       }
 
       return promise
     },
 
     renderToStream(
-      component: ReactElement<any>,
+      component: ReactElement,
       context: UserContext,
     ): NodeJS.ReadableStream {
+      // eslint-disable-next-line sonar/deprecation -- compatibility
       const renderStream = renderToNodeStream(component)
 
       process.nextTick(() => renderStream.emit('afterRender'))
@@ -81,7 +73,7 @@ export function createRenderer(
 
       renderStream
         .on('afterRender', () => templateStream.emit('afterRender'))
-        .on('error', err => templateStream.emit('error', err))
+        .on('error', (err: unknown) => templateStream.emit('error', err))
         .pipe(templateStream)
 
       return templateStream
