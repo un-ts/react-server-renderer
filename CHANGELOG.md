@@ -1,5 +1,11 @@
 # react-server-renderer
 
+## 2.0.3
+
+### Patch Changes
+
+- [#52](https://github.com/un-ts/react-server-renderer/pull/52) [`80e3086`](https://github.com/un-ts/react-server-renderer/commit/80e308657ca7a57f0d1b63e0b12615e36ae4f583) Thanks [@JounQin](https://github.com/JounQin)! - fix: better compatible with webpack v4/v5
+
 ## 2.0.2
 
 ### Patch Changes
