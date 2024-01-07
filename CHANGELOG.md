@@ -1,5 +1,11 @@
 # react-server-renderer
 
+## 2.0.2
+
+### Patch Changes
+
+- [#50](https://github.com/un-ts/react-server-renderer/pull/50) [`2a816ae`](https://github.com/un-ts/react-server-renderer/commit/2a816aeb2c6bd36fa3d2ae993d8a11c3d9ff7284) Thanks [@JounQin](https://github.com/JounQin)! - fix: lodash is commonjs
+
 ## 2.0.1
 
 ### Patch Changes
