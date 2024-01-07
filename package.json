@@ -1,15 +1,17 @@
 {
   "name": "react-server-renderer",
   "version": "2.0.1",
+  "type": "module",
   "description": "Yet another simple React SSR solution inspired by vue-server-render",
   "repository": "git@github.com:un-ts/react-server-renderer.git",
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
-  "type": "module",
   "packageManager": "yarn@4.0.2",
+  "engines": {
+    "node": "^12.20.0 || >=14.13.0"
+  },
   "main": "lib/index.cjs",
   "module": "lib/index.js",
-  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -20,22 +22,21 @@
     "./server-plugin": "./lib/webpack-plugin/server.js",
     "./package.json": "./package.json"
   },
+  "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
-  "engines": {
-    "node": "^12.20.0 || >=14.13.0"
-  },
   "scripts": {
     "build": "run-p 'build:*'",
     "build:r": "r -f cjs",
     "build:tsc": "tsc",
+    "codesandbox:install": "yarn --ignore-engines",
     "lint": "run-p 'lint:*'",
     "lint:es": "eslint . --cache",
     "lint:tsc": "tsc --noEmit",
-    "typecov": "type-coverage",
     "prepare": "simple-git-hooks",
-    "release": "yarn build && clean-pkg-json && changeset publish"
+    "release": "yarn build && clean-pkg-json && changeset publish",
+    "typecov": "type-coverage"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
