@@ -9,18 +9,21 @@ export const warn = (msg: string) => console.error(red(`${prefix} ${msg}\n`))
 export const tip = (msg: string) => console.log(yellow(`${prefix} ${msg}\n`))
 
 export const validate = (compiler: Compiler) => {
-  if (compiler.options.target !== 'node') {
+  const { externals, output, target } = compiler.options
+
+  if (target !== 'node') {
     warn('webpack config `target` should be "node".')
   }
 
   if (
+    output.library?.type !== 'commonjs2' &&
     // @ts-expect-error -- compatibility
-    compiler.options.output.libraryTarget !== 'commonjs2'
+    output.libraryTarget !== 'commonjs2'
   ) {
     warn('webpack config `output.libraryTarget` should be "commonjs2".')
   }
 
-  if (!compiler.options.externals) {
+  if (!externals) {
     tip(
       'It is recommended to externalize dependencies in the server build for ' +
         'better build performance.',
