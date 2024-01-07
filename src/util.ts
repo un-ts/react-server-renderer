@@ -1,4 +1,4 @@
-import { isPlainObject } from 'lodash'
+import _ from 'lodash'
 
 import type { File } from './types.js'
 
@@ -11,7 +11,8 @@ export const isJS = (file: File): boolean =>
 export const isCSS = (file: File): boolean =>
   /\.css(?:\?[^.]+)?$/.test(getFilename(file))
 
-export const isObjectType = isPlainObject as <T>(
+// eslint-disable-next-line @typescript-eslint/unbound-method
+export const isObjectType = _.isPlainObject as <T>(
   value: unknown,
 ) => value is T & object
 
