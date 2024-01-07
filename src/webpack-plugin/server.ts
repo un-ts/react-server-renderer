@@ -38,14 +38,14 @@ export class ReactSSRServerPlugin implements WebpackPluginInstance {
 
       const entry = entryAssets[0]
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      if (!entry || typeof entry !== 'string') {
+      if (!entry) {
         throw new Error(
           `Entry "${entryName}" not found. Did you specify the correct entry option?`,
         )
       }
 
       const bundle = {
-        entry,
+        entry: typeof entry === 'string' ? entry : entry.name,
         files: {} as Record<string, Buffer | string>,
         maps: {} as Record<string, unknown>,
       }
