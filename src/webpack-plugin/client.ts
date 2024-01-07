@@ -1,5 +1,5 @@
 import hash from 'hash-sum'
-import { uniq } from 'lodash'
+import _ from 'lodash'
 import type { Compiler, WebpackPluginInstance, sources } from 'webpack'
 
 import { getFilename } from '../util.js'
@@ -23,9 +23,9 @@ export class ReactSSRClientPlugin implements WebpackPluginInstance {
     onEmit(compiler, 'react-client-plugin', (compilation, cb) => {
       const stats = compilation.getStats().toJson()
 
-      const allFiles = uniq<string>(stats.assets!.map(a => a.name))
+      const allFiles = _.uniq<string>(stats.assets!.map(a => a.name))
 
-      const initialFiles = uniq(
+      const initialFiles = _.uniq(
         Object.keys(stats.entrypoints!)
           .map(name => stats.entrypoints![name].assets!)
           .reduce((assets, all) => [...all, ...assets], [])

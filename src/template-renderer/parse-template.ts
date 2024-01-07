@@ -1,4 +1,4 @@
-import { template as compile } from 'lodash'
+import _ from 'lodash'
 
 import type { ParsedTemplate } from '../types.js'
 
@@ -32,9 +32,9 @@ export function parseTemplate(
   }
 
   return {
-    head: compile(template.slice(0, i), compileOptions),
-    neck: compile(template.slice(i, j), compileOptions),
-    tail: compile(
+    head: _.template(template.slice(0, i), compileOptions),
+    neck: _.template(template.slice(i, j), compileOptions),
+    tail: _.template(
       template.slice(j + contentPlaceholder.length),
       compileOptions,
     ),
